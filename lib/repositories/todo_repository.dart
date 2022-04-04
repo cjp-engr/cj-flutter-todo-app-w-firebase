@@ -11,23 +11,24 @@ class TodoRepository {
   });
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-  Future<void> addTodo(String desc) async {
+  Future<String> addTodo(String desc) async {
     try {
+      // Uuid uuid = Uuid();
       final User user = auth.currentUser!;
       final uid = user.uid;
       final todoID = DateTime.now().toString();
 
-      await usersTodo.doc(uid).update({
-        "todos": FieldValue.arrayUnion(
-          [
-            {
-              'id': todoID,
-              'description': desc,
-              'completed': false,
-            }
-          ],
-        )
-      });
+      await usersRef.doc(uid).collection('todos').doc('todos').set(
+        {
+          todoID: {
+            'id': todoID,
+            'description': desc,
+            'completed': false,
+          }
+        },
+        SetOptions(merge: true),
+      );
+      return todoID;
     } on FirebaseException catch (e) {
       throw CustomError(
         code: e.code,
@@ -48,14 +49,14 @@ class TodoRepository {
       final User user = auth.currentUser!;
       final uid = user.uid;
 
-      DocumentSnapshot documentSnapshot = await usersTodo.doc(uid).get();
-
+      DocumentSnapshot documentSnapshot =
+          await usersRef.doc(uid).collection('todos').doc('todos').get();
       if (documentSnapshot.exists) {
         var data = documentSnapshot.data() as Map;
 
-        return data['todos'];
+        return data;
       }
-      throw 'Todo not found';
+      ;
     } on FirebaseException catch (e) {
       throw CustomError(
         code: e.code,
@@ -72,22 +73,7 @@ class TodoRepository {
   }
 
   Future<void> removeTodo(Todo todo) async {
-    try {
-      final User user = auth.currentUser!;
-      final uid = user.uid;
-
-      await usersTodo.doc(uid).update({
-        "todos": FieldValue.arrayRemove(
-          [
-            {
-              'id': todo.id,
-              'description': todo.description,
-              'completed': todo.completed,
-            }
-          ],
-        )
-      });
-    } on FirebaseException catch (e) {
+    try {} on FirebaseException catch (e) {
       throw CustomError(
         code: e.code,
         message: e.message!,
@@ -102,7 +88,21 @@ class TodoRepository {
     }
   }
 
-  Future<void> editTodo(String id, String desc) async {}
+  Future<void> editTodo(String id, String desc) async {
+    try {} on FirebaseException catch (e) {
+      throw CustomError(
+        code: e.code,
+        message: e.message!,
+        plugin: e.plugin,
+      );
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception',
+        message: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
 
   Future<void> toggleTodo(
     String id,

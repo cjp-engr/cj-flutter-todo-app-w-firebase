@@ -19,16 +19,17 @@ class TodoListCubit extends Cubit<TodoListState> {
       emit(state.copyWith(
         todoListStatus: TodoListStatus.loading,
       ));
-      var todos = await todoRepository.readTodo() as List;
-      for (int i = 0; i < todos.length; i++) {
-        final newTodo = Todo(
-          id: todos[i]['id'],
-          description: todos[i]['description'],
-          completed: todos[i]['completed'],
+      var todos = await todoRepository.readTodo() as Map;
+      for (var todo in todos.values) {
+        final readTodo = Todo(
+          id: todo['id'],
+          description: todo['description'],
+          completed: todo['completed'],
         );
-        final newTodos = [...state.todos, newTodo];
+        final rTodos = [...state.todos, readTodo];
         emit(state.copyWith(
-          todos: newTodos,
+          todos: rTodos,
+          todoListStatus: TodoListStatus.loading,
         ));
       }
       emit(state.copyWith(
@@ -47,19 +48,13 @@ class TodoListCubit extends Cubit<TodoListState> {
       emit(state.copyWith(
         todoListStatus: TodoListStatus.loading,
       ));
-      await todoRepository.addTodo(desc);
-      var todo = await todoRepository.readTodo() as List;
+      String todoId = await todoRepository.addTodo(desc);
       final newTodo = Todo(
-        id: todo.last['id'],
-        description: todo.last['description'],
-        completed: todo.last['completed'],
+        id: todoId,
+        description: desc,
       );
       final newTodos = [...state.todos, newTodo];
-
-      emit(state.copyWith(
-        todoListStatus: TodoListStatus.loaded,
-        todos: newTodos,
-      ));
+      emit(state.copyWith(todos: newTodos));
     } on CustomError catch (e) {
       emit(state.copyWith(
         todoListStatus: TodoListStatus.error,
@@ -69,15 +64,47 @@ class TodoListCubit extends Cubit<TodoListState> {
   }
 
   Future<void> removeTodo(Todo todo) async {
+    // try {
+    //   emit(state.copyWith(
+    //     todoListStatus: TodoListStatus.loading,
+    //   ));
+    //   final remTodo = state.todos.where((Todo t) => t.id != todo.id).toList();
+    //   await todoRepository.removeTodo(todo);
+    //   emit(state.copyWith(
+    //     todoListStatus: TodoListStatus.loaded,
+    //     todos: remTodo,
+    //   ));
+    // } on CustomError catch (e) {
+    //   emit(state.copyWith(
+    //     todoListStatus: TodoListStatus.error,
+    //     error: e,
+    //   ));
+    // }
+  }
+
+  Future<void> editTodo(String id, String desc) async {
     try {
       emit(state.copyWith(
         todoListStatus: TodoListStatus.loading,
       ));
-      final remTodo = state.todos.where((Todo t) => t.id != todo.id).toList();
-      await todoRepository.removeTodo(todo);
+
+      await todoRepository.editTodo(id, desc);
+      final editTodo = state.todos.map(
+        (Todo todo) {
+          if (id == todo.id) {
+            return Todo(
+              id: todo.id,
+              description: desc,
+              completed: todo.completed,
+            );
+          }
+          return todo;
+        },
+      ).toList();
+
       emit(state.copyWith(
         todoListStatus: TodoListStatus.loaded,
-        todos: remTodo,
+        todos: editTodo,
       ));
     } on CustomError catch (e) {
       emit(state.copyWith(
@@ -87,22 +114,22 @@ class TodoListCubit extends Cubit<TodoListState> {
     }
   }
 
-  void editTodo(String id, String desc) {
-    final editTodo = state.todos.map(
-      (Todo todo) {
-        if (id == todo.id) {
-          return Todo(
-            id: todo.id,
-            description: desc,
-            completed: todo.completed,
-          );
-        }
-        return todo;
-      },
-    ).toList();
+  // void editTodo(String id, String desc) {
+  //   final editTodo = state.todos.map(
+  //     (Todo todo) {
+  //       if (id == todo.id) {
+  //         return Todo(
+  //           id: todo.id,
+  //           description: desc,
+  //           completed: todo.completed,
+  //         );
+  //       }
+  //       return todo;
+  //     },
+  //   ).toList();
 
-    emit(state.copyWith(todos: editTodo));
-  }
+  //   emit(state.copyWith(todos: editTodo));
+  // }
 
   void toggleTodo(String id) {
     final togTodo = state.todos.map(
