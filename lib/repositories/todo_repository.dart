@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_bloc/constants/db_constants.dart';
 import 'package:first_bloc/models/custom_error.dart';
+import 'package:first_bloc/models/todo_model.dart';
 
 class TodoRepository {
   final FirebaseFirestore firebaseFirestore;
@@ -69,4 +70,12 @@ class TodoRepository {
       );
     }
   }
+
+  Future<void> editTodo(String id, String desc) async {}
+
+  Future<void> toggleTodo(
+    String id,
+  ) async {}
+
+  Future<void> removeTodo(Todo todo) async {}
 }
