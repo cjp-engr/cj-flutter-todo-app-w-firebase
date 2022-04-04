@@ -15,6 +15,7 @@ class ProfileRepository {
 
       if (userDoc.exists) {
         final currentUser = User.fromDoc(userDoc);
+        print(currentUser);
         return currentUser;
       }
 
