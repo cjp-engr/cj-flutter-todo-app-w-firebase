@@ -71,11 +71,40 @@ class TodoRepository {
     }
   }
 
+  Future<void> removeTodo(Todo todo) async {
+    try {
+      final User user = auth.currentUser!;
+      final uid = user.uid;
+
+      await usersTodo.doc(uid).update({
+        "todos": FieldValue.arrayRemove(
+          [
+            {
+              'id': todo.id,
+              'description': todo.description,
+              'completed': todo.completed,
+            }
+          ],
+        )
+      });
+    } on FirebaseException catch (e) {
+      throw CustomError(
+        code: e.code,
+        message: e.message!,
+        plugin: e.plugin,
+      );
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception',
+        message: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
+
   Future<void> editTodo(String id, String desc) async {}
 
   Future<void> toggleTodo(
     String id,
   ) async {}
-
-  Future<void> removeTodo(Todo todo) async {}
 }

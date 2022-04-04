@@ -23,6 +23,7 @@ class ShowTodos extends StatelessWidget {
                   secondaryBackground: showBackground(1),
                   onDismissed: (_) {
                     context.read<TodoListCubit>().removeTodo(todos[index]);
+                    print(todos[index]);
                   },
                   confirmDismiss: (_) {
                     return showDialog(
@@ -134,6 +135,7 @@ class _TodoItemState extends State<TodoItem> {
                                   widget.todo.id,
                                   textController.text,
                                 );
+                            print(widget.todo.id);
                             Navigator.pop(context);
                           }
                         });

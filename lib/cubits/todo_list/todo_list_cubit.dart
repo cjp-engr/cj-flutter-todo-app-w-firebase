@@ -68,6 +68,25 @@ class TodoListCubit extends Cubit<TodoListState> {
     }
   }
 
+  Future<void> removeTodo(Todo todo) async {
+    try {
+      emit(state.copyWith(
+        todoListStatus: TodoListStatus.loading,
+      ));
+      final remTodo = state.todos.where((Todo t) => t.id != todo.id).toList();
+      await todoRepository.removeTodo(todo);
+      emit(state.copyWith(
+        todoListStatus: TodoListStatus.loaded,
+        todos: remTodo,
+      ));
+    } on CustomError catch (e) {
+      emit(state.copyWith(
+        todoListStatus: TodoListStatus.error,
+        error: e,
+      ));
+    }
+  }
+
   void editTodo(String id, String desc) {
     final editTodo = state.todos.map(
       (Todo todo) {
@@ -99,10 +118,5 @@ class TodoListCubit extends Cubit<TodoListState> {
       },
     ).toList();
     emit(state.copyWith(todos: togTodo));
-  }
-
-  void removeTodo(Todo todo) {
-    final remTodo = state.todos.where((Todo t) => t.id != todo.id).toList();
-    emit(state.copyWith(todos: remTodo));
   }
 }
