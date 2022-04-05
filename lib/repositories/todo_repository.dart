@@ -10,16 +10,19 @@ class TodoRepository {
   TodoRepository({
     required this.firebaseFirestore,
   });
-  final FirebaseAuth auth = FirebaseAuth.instance;
+
+  String get _userUid {
+    final User user = authTodoRepo.currentUser!;
+    final uid = user.uid;
+    return uid;
+  }
 
   Future<String> addTodo(String desc) async {
     try {
       Uuid uuid = Uuid();
-      final User user = auth.currentUser!;
-      final uid = user.uid;
       final todoID = uuid.v4();
 
-      await usersRef.doc(uid).collection('todos').doc('todos').set(
+      await usersRef.doc(_userUid).collection('todos').doc('todos').set(
         {
           todoID: {
             'id': todoID,
@@ -47,11 +50,8 @@ class TodoRepository {
 
   Future<dynamic> readTodo() async {
     try {
-      final User user = auth.currentUser!;
-      final uid = user.uid;
-
       DocumentSnapshot documentSnapshot =
-          await usersRef.doc(uid).collection('todos').doc('todos').get();
+          await usersRef.doc(_userUid).collection('todos').doc('todos').get();
       if (documentSnapshot.exists) {
         var data = documentSnapshot.data() as Map;
 
@@ -75,10 +75,8 @@ class TodoRepository {
 
   Future<void> removeTodo(String id) async {
     try {
-      final User user = auth.currentUser!;
-      final uid = user.uid;
       await usersRef
-          .doc(uid)
+          .doc(_userUid)
           .collection('todos')
           .doc('todos')
           .update({id: FieldValue.delete()})
@@ -102,10 +100,8 @@ class TodoRepository {
 
   Future<void> editTodo(String id, String desc, bool completed) async {
     try {
-      final User user = auth.currentUser!;
-      final uid = user.uid;
       await usersRef
-          .doc(uid)
+          .doc(_userUid)
           .collection('todos')
           .doc('todos')
           .update({
@@ -135,10 +131,8 @@ class TodoRepository {
 
   Future<void> toggleTodo(Todo t) async {
     try {
-      final User user = auth.currentUser!;
-      final uid = user.uid;
       await usersRef
-          .doc(uid)
+          .doc(_userUid)
           .collection('todos')
           .doc('todos')
           .update({
