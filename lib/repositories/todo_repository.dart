@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_bloc/constants/db_constants.dart';
 import 'package:first_bloc/models/custom_error.dart';
 import 'package:first_bloc/models/todo_model.dart';
+import 'package:uuid/uuid.dart';
 
 class TodoRepository {
   final FirebaseFirestore firebaseFirestore;
@@ -13,10 +14,10 @@ class TodoRepository {
 
   Future<String> addTodo(String desc) async {
     try {
-      // Uuid uuid = Uuid();
+      Uuid uuid = Uuid();
       final User user = auth.currentUser!;
       final uid = user.uid;
-      final todoID = DateTime.now().toString();
+      final todoID = uuid.v4();
 
       await usersRef.doc(uid).collection('todos').doc('todos').set(
         {
@@ -72,8 +73,19 @@ class TodoRepository {
     }
   }
 
-  Future<void> removeTodo(Todo todo) async {
-    try {} on FirebaseException catch (e) {
+  Future<void> removeTodo(String id) async {
+    try {
+      final User user = auth.currentUser!;
+      final uid = user.uid;
+      await usersRef
+          .doc(uid)
+          .collection('todos')
+          .doc('todos')
+          .update({id: FieldValue.delete()})
+          .then((value) => print("User's Property Deleted"))
+          .catchError(
+              (error) => print("Failed to delete user's property: $error"));
+    } on FirebaseException catch (e) {
       throw CustomError(
         code: e.code,
         message: e.message!,
@@ -88,8 +100,25 @@ class TodoRepository {
     }
   }
 
-  Future<void> editTodo(String id, String desc) async {
-    try {} on FirebaseException catch (e) {
+  Future<void> editTodo(String id, String desc, bool completed) async {
+    try {
+      final User user = auth.currentUser!;
+      final uid = user.uid;
+      await usersRef
+          .doc(uid)
+          .collection('todos')
+          .doc('todos')
+          .update({
+            id: {
+              'id': id,
+              'description': desc,
+              'completed': completed,
+            }
+          })
+          .then((value) => print("Todos desc updated"))
+          .catchError(
+              (error) => print("Failed to delete user's property: $error"));
+    } on FirebaseException catch (e) {
       throw CustomError(
         code: e.code,
         message: e.message!,
@@ -104,7 +133,36 @@ class TodoRepository {
     }
   }
 
-  Future<void> toggleTodo(
-    String id,
-  ) async {}
+  Future<void> toggleTodo(Todo t) async {
+    try {
+      final User user = auth.currentUser!;
+      final uid = user.uid;
+      await usersRef
+          .doc(uid)
+          .collection('todos')
+          .doc('todos')
+          .update({
+            t.id: {
+              'id': t.id,
+              'description': t.description,
+              'completed': !t.completed,
+            }
+          })
+          .then((value) => print("Todos completed updated"))
+          .catchError(
+              (error) => print("Failed to delete user's property: $error"));
+    } on FirebaseException catch (e) {
+      throw CustomError(
+        code: e.code,
+        message: e.message!,
+        plugin: e.plugin,
+      );
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception',
+        message: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
 }

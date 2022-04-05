@@ -64,31 +64,32 @@ class TodoListCubit extends Cubit<TodoListState> {
   }
 
   Future<void> removeTodo(Todo todo) async {
-    // try {
-    //   emit(state.copyWith(
-    //     todoListStatus: TodoListStatus.loading,
-    //   ));
-    //   final remTodo = state.todos.where((Todo t) => t.id != todo.id).toList();
-    //   await todoRepository.removeTodo(todo);
-    //   emit(state.copyWith(
-    //     todoListStatus: TodoListStatus.loaded,
-    //     todos: remTodo,
-    //   ));
-    // } on CustomError catch (e) {
-    //   emit(state.copyWith(
-    //     todoListStatus: TodoListStatus.error,
-    //     error: e,
-    //   ));
-    // }
+    try {
+      emit(state.copyWith(
+        todoListStatus: TodoListStatus.loading,
+      ));
+      final remTodo = state.todos.where((Todo t) => t.id != todo.id).toList();
+      print(todo.id);
+      await todoRepository.removeTodo(todo.id);
+      emit(state.copyWith(
+        todoListStatus: TodoListStatus.loaded,
+        todos: remTodo,
+      ));
+    } on CustomError catch (e) {
+      emit(state.copyWith(
+        todoListStatus: TodoListStatus.error,
+        error: e,
+      ));
+    }
   }
 
-  Future<void> editTodo(String id, String desc) async {
+  Future<void> editTodo(String id, String desc, bool completed) async {
     try {
       emit(state.copyWith(
         todoListStatus: TodoListStatus.loading,
       ));
 
-      await todoRepository.editTodo(id, desc);
+      await todoRepository.editTodo(id, desc, completed);
       final editTodo = state.todos.map(
         (Todo todo) {
           if (id == todo.id) {
@@ -114,36 +115,34 @@ class TodoListCubit extends Cubit<TodoListState> {
     }
   }
 
-  // void editTodo(String id, String desc) {
-  //   final editTodo = state.todos.map(
-  //     (Todo todo) {
-  //       if (id == todo.id) {
-  //         return Todo(
-  //           id: todo.id,
-  //           description: desc,
-  //           completed: todo.completed,
-  //         );
-  //       }
-  //       return todo;
-  //     },
-  //   ).toList();
+  Future<void> toggleTodo(Todo t) async {
+    try {
+      emit(state.copyWith(
+        todoListStatus: TodoListStatus.loading,
+      ));
+      await todoRepository.toggleTodo(t);
+      final togTodo = state.todos.map(
+        (Todo todo) {
+          if (t.id == todo.id) {
+            return Todo(
+              id: todo.id,
+              description: todo.description,
+              completed: !todo.completed,
+            );
+          }
+          return todo;
+        },
+      ).toList();
 
-  //   emit(state.copyWith(todos: editTodo));
-  // }
-
-  void toggleTodo(String id) {
-    final togTodo = state.todos.map(
-      (Todo todo) {
-        if (id == todo.id) {
-          return Todo(
-            id: todo.id,
-            description: todo.description,
-            completed: !todo.completed,
-          );
-        }
-        return todo;
-      },
-    ).toList();
-    emit(state.copyWith(todos: togTodo));
+      emit(state.copyWith(
+        todoListStatus: TodoListStatus.loaded,
+        todos: togTodo,
+      ));
+    } on CustomError catch (e) {
+      emit(state.copyWith(
+        todoListStatus: TodoListStatus.error,
+        error: e,
+      ));
+    }
   }
 }

@@ -134,6 +134,7 @@ class _TodoItemState extends State<TodoItem> {
                             context.read<TodoListCubit>().editTodo(
                                   widget.todo.id,
                                   textController.text,
+                                  widget.todo.completed,
                                 );
                             print(widget.todo.id);
                             Navigator.pop(context);
@@ -152,7 +153,7 @@ class _TodoItemState extends State<TodoItem> {
       leading: Checkbox(
         value: widget.todo.completed,
         onChanged: (bool? checked) {
-          context.read<TodoListCubit>().toggleTodo(widget.todo.id);
+          context.read<TodoListCubit>().toggleTodo(widget.todo);
         },
       ),
       title: Text(
