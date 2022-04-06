@@ -1,9 +1,9 @@
-import 'package:first_bloc/cubits/cubits.dart';
+import 'package:first_bloc/blocs/blocs.dart';
 import 'package:first_bloc/models/todo_model.dart';
-import 'package:first_bloc/pages/active_todos.dart';
-import 'package:first_bloc/pages/profile_page.dart';
-import 'package:first_bloc/pages/todos_list.dart';
-import 'package:first_bloc/pages/completed_todos.dart';
+import 'package:first_bloc/pages/todos/active_todos.dart';
+import 'package:first_bloc/pages/user/profile_page.dart';
+import 'package:first_bloc/pages/todos/completed_todos.dart';
+import 'package:first_bloc/pages/todos/todos_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -90,7 +90,10 @@ class _BottomBarState extends State<BottomBar> {
               ? 'Active'
               : 'Completed',
       onPressed: () {
-        context.read<TodoFilterCubit>().changeFilter(filter);
+        //context.read<TodoFilterBloc>().changeFilter(filter);
+        context
+            .read<TodoFilterBloc>()
+            .add(ChangeFilterEvent(newFilter: filter));
       },
       textStyle: TextStyle(
         fontSize: 12.0,
@@ -102,11 +105,14 @@ class _BottomBarState extends State<BottomBar> {
   profileIcon(BuildContext context) {
     return const GButton(
       icon: Icons.account_circle,
+      textStyle: TextStyle(
+        fontSize: 12.0,
+      ),
     );
   }
 
   Color textColor(BuildContext context, Filter filter) {
-    final currentFilter = context.watch<TodoFilterCubit>().state.filter;
+    final currentFilter = context.watch<TodoFilterBloc>().state.filter;
     return currentFilter == filter ? Colors.blue : Colors.grey;
   }
 }

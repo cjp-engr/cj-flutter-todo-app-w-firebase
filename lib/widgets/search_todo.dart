@@ -1,4 +1,4 @@
-import 'package:first_bloc/cubits/cubits.dart';
+import 'package:first_bloc/blocs/blocs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../utils/debounce.dart';
@@ -21,7 +21,9 @@ class SearchTodo extends StatelessWidget {
           onChanged: (String? newSearchTerm) {
             if (newSearchTerm != null) {
               debounce.run(() {
-                context.read<TodoSearchCubit>().setSearchTerm(newSearchTerm);
+                context
+                    .read<TodoSearchBloc>()
+                    .add(SetSearchTermEvent(newSearchTerm: newSearchTerm));
               });
             }
           },

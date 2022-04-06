@@ -1,9 +1,9 @@
-import 'package:first_bloc/cubits/signup/signup_cubit.dart';
+import 'package:first_bloc/blocs/blocs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:validators/validators.dart';
 
-import '../utils/error_dialog.dart';
+import '../../utils/error_dialog.dart';
 
 class SignupPage extends StatefulWidget {
   static const String routeName = '/signup';

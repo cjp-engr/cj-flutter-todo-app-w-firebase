@@ -1,5 +1,4 @@
-import 'package:first_bloc/cubits/auth/auth_bloc.dart';
-import 'package:first_bloc/cubits/profile/profile_cubit.dart';
+import 'package:first_bloc/blocs/blocs.dart';
 import 'package:first_bloc/utils/error_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,6 +1,6 @@
-import 'package:first_bloc/cubits/auth/auth_bloc.dart';
-import 'package:first_bloc/pages/home_page.dart';
-import 'package:first_bloc/pages/signin_page.dart';
+import 'package:first_bloc/blocs/blocs.dart';
+import 'package:first_bloc/pages/user/home_page.dart';
+import 'package:first_bloc/pages/authentication/signin_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

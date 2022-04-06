@@ -1,7 +1,6 @@
+import 'package:first_bloc/blocs/blocs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../cubits/cubits.dart';
 
 class CreateTodo extends StatefulWidget {
   const CreateTodo({Key? key}) : super(key: key);
@@ -26,7 +25,8 @@ class _CreateTodoState extends State<CreateTodo> {
       decoration: const InputDecoration(labelText: 'What to do?'),
       onSubmitted: (String? todoDesc) {
         if (todoDesc != null && todoDesc.trim().isNotEmpty) {
-          context.read<TodoListCubit>().addTodo(todoDesc);
+          //context.read<TodoListBloc>().addTodo(todoDesc);
+          context.read<TodoListBloc>().add(AddTodoEvent(description: todoDesc));
           newTodoController.clear();
         }
       },

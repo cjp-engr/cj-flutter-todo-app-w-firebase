@@ -1,4 +1,4 @@
-import 'package:first_bloc/pages/todos_list.dart';
+import 'package:first_bloc/pages/todos/todos_list.dart';
 import 'package:flutter/material.dart';
 
 class CompletedTodos extends StatelessWidget {

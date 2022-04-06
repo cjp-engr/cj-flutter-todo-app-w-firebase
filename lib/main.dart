@@ -1,18 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:first_bloc/cubits/active_todo_count/active_todo_count_cubit.dart';
-import 'package:first_bloc/cubits/auth/auth_bloc.dart';
-import 'package:first_bloc/cubits/filtered_todos/filtered_todos_cubit.dart';
-import 'package:first_bloc/cubits/profile/profile_cubit.dart';
-import 'package:first_bloc/cubits/signin/signin_cubit.dart';
-import 'package:first_bloc/cubits/signup/signup_cubit.dart';
-import 'package:first_bloc/cubits/todo_filter/todo_filter_cubit.dart';
-import 'package:first_bloc/cubits/todo_list/todo_list_cubit.dart';
-import 'package:first_bloc/cubits/todo_search/todo_search_cubit.dart';
-import 'package:first_bloc/pages/home_page.dart';
-import 'package:first_bloc/pages/signin_page.dart';
-import 'package:first_bloc/pages/signup_page.dart';
-import 'package:first_bloc/pages/splash_page.dart';
+import 'package:first_bloc/blocs/blocs.dart';
+import 'package:first_bloc/pages/user/home_page.dart';
+import 'package:first_bloc/pages/authentication/signin_page.dart';
+import 'package:first_bloc/pages/authentication/signup_page.dart';
+import 'package:first_bloc/pages/authentication/splash_page.dart';
 import 'package:first_bloc/repositories/auth_repository.dart';
 import 'package:first_bloc/repositories/profile_repository.dart';
 import 'package:first_bloc/repositories/todo_repository.dart';
@@ -75,30 +67,26 @@ class MyApp extends StatelessWidget {
               authRepository: context.read<AuthRepository>(),
             ),
           ),
-          BlocProvider<TodoFilterCubit>(
-            create: (context) => TodoFilterCubit(),
+          BlocProvider<TodoFilterBloc>(
+            create: (context) => TodoFilterBloc(),
           ),
-          BlocProvider<TodoSearchCubit>(
-            create: (context) => TodoSearchCubit(),
+          BlocProvider<TodoSearchBloc>(
+            create: (context) => TodoSearchBloc(),
           ),
-          BlocProvider<TodoListCubit>(
-            create: (context) => TodoListCubit(
+          BlocProvider<TodoListBloc>(
+            create: (context) => TodoListBloc(
               todoRepository: context.read<TodoRepository>(),
             ),
           ),
-          BlocProvider<ActiveTodoCountCubit>(
-            create: (context) => ActiveTodoCountCubit(
+          BlocProvider<ActiveTodoCountBloc>(
+            create: (context) => ActiveTodoCountBloc(
               initialActiveTodoCount:
-                  context.read<TodoListCubit>().state.todos.length,
-              todoListCubit: BlocProvider.of<TodoListCubit>(context),
+                  context.read<TodoListBloc>().state.todos.length,
             ),
           ),
-          BlocProvider<FilteredTodosCubit>(
-            create: (context) => FilteredTodosCubit(
-              initialTodos: context.read<TodoListCubit>().state.todos,
-              todoFilterCubit: BlocProvider.of<TodoFilterCubit>(context),
-              todoSearchCubit: BlocProvider.of<TodoSearchCubit>(context),
-              todoListCubit: BlocProvider.of<TodoListCubit>(context),
+          BlocProvider<FilteredTodosBloc>(
+            create: (context) => FilteredTodosBloc(
+              initialTodos: context.read<TodoListBloc>().state.todos,
             ),
           ),
         ],
@@ -135,7 +123,7 @@ class MyApp extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            fontFamily: 'WednesdayAdventure',
+            fontFamily: 'Righteous',
           ),
         ),
       ),

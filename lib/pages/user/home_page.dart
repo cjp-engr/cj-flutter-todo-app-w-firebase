@@ -1,4 +1,4 @@
-import 'package:first_bloc/cubits/cubits.dart';
+import 'package:first_bloc/blocs/blocs.dart';
 import 'package:first_bloc/widgets/bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _getInitialTodos() {
-    context.read<TodoListCubit>().initialLoadTodo();
+    context.read<TodoListBloc>().add(InitialLoadTodoEvent());
   }
 
   @override

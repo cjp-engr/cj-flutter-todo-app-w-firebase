@@ -1,10 +1,9 @@
-import 'package:first_bloc/cubits/auth/auth_bloc.dart';
-import 'package:first_bloc/cubits/cubits.dart';
+import 'package:first_bloc/blocs/blocs.dart';
 import 'package:first_bloc/models/todo_model.dart';
-import 'package:first_bloc/pages/create_todo.dart';
+import 'package:first_bloc/pages/todos/create_todo.dart';
+import 'package:first_bloc/pages/todos/show_todos.dart';
 import 'package:first_bloc/widgets/bottom_bar.dart';
 import 'package:first_bloc/widgets/search_todo.dart';
-import 'package:first_bloc/pages/show_todos.dart';
 import 'package:first_bloc/widgets/todo_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +13,7 @@ class TodosList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final filter = context.watch<TodoFilterCubit>().state.filter;
+    final filter = context.watch<TodoFilterBloc>().state.filter;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
