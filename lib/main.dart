@@ -122,6 +122,10 @@ class MyApp extends StatelessWidget {
                 fontSize: 12.0,
                 fontWeight: FontWeight.bold,
               ),
+              button: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             fontFamily: 'Righteous',
           ),

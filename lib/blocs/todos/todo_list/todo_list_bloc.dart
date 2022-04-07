@@ -29,7 +29,9 @@ class TodoListBloc extends Bloc<TodoListEvent, TodoListState> {
     Emitter<TodoListState> emit,
   ) async {
     try {
+      List<Todo> clearExistingTodos = [];
       emit(state.copyWith(
+        todos: clearExistingTodos,
         todoListStatus: TodoListStatus.loading,
       ));
       var todos = await todoRepository.readTodo() as Map;

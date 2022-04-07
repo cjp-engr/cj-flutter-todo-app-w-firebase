@@ -71,8 +71,10 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                       const SizedBox(height: 20.0),
                       TextFormField(
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
                           filled: true,
                           labelText: 'Name',
                           prefixIcon: Icon(Icons.account_box),
@@ -94,8 +96,10 @@ class _SignupPageState extends State<SignupPage> {
                       TextFormField(
                         keyboardType: TextInputType.emailAddress,
                         autocorrect: false,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
                           filled: true,
                           labelText: 'Email',
                           prefixIcon: Icon(Icons.email),
@@ -117,8 +121,10 @@ class _SignupPageState extends State<SignupPage> {
                       TextFormField(
                         controller: _passwordController,
                         obscureText: true,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
                           filled: true,
                           labelText: 'Password',
                           prefixIcon: Icon(Icons.lock),
@@ -139,8 +145,10 @@ class _SignupPageState extends State<SignupPage> {
                       const SizedBox(height: 20.0),
                       TextFormField(
                         obscureText: true,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
                           filled: true,
                           labelText: 'Confirm password',
                           prefixIcon: Icon(Icons.lock),
@@ -158,13 +166,13 @@ class _SignupPageState extends State<SignupPage> {
                             ? null
                             : _submit,
                         style: ElevatedButton.styleFrom(
-                          textStyle: const TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w600,
-                          ),
                           padding: const EdgeInsets.symmetric(
                             vertical: 10.0,
                           ),
+                          shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(30.0),
+                          ),
+                          elevation: 10,
                         ),
                         child: Text(
                           state.signupStatus == SignupStatus.submitting
@@ -180,12 +188,11 @@ class _SignupPageState extends State<SignupPage> {
                                 Navigator.pop(context);
                               },
                         style: TextButton.styleFrom(
-                          textStyle: const TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w600,
-                            decoration: TextDecoration.underline,
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 10.0),
+                          textStyle: Theme.of(context).textTheme.button?.merge(
+                                TextStyle(
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
                         ),
                         child: const Text('Already a member? Sign in!'),
                       ),

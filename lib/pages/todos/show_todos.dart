@@ -1,5 +1,4 @@
 import 'package:first_bloc/blocs/blocs.dart';
-import 'package:first_bloc/blocs/filtered_todos/filtered_todos_bloc.dart';
 import 'package:first_bloc/models/todo_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -91,7 +90,6 @@ class ShowTodos extends StatelessWidget {
               background: showBackground(0),
               secondaryBackground: showBackground(1),
               onDismissed: (_) {
-                //context.read<TodoListBloc>().removeTodo(todos[index]);
                 context
                     .read<TodoListBloc>()
                     .add(RemoveTodoEvent(todo: todos[index]));
@@ -121,11 +119,28 @@ class ShowTodos extends StatelessWidget {
                   },
                 );
               },
-              child: TodoItem(todo: todos[index]),
+              child: Card(
+                //child: TodoItem(todo: todos[index]),
+                child: Container(
+                  height: 80,
+                  padding: const EdgeInsets.only(
+                    left: 16.0,
+                    right: 16.0,
+                    top: 10,
+                  ),
+                  child: TodoItem(todo: todos[index]),
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+              ),
             );
           },
           separatorBuilder: (BuildContext context, int index) {
-            return const Divider(color: Colors.grey);
+            return const Divider(
+              //color: Colors.grey,
+              height: 7,
+            );
           },
         ),
       ),
@@ -204,11 +219,6 @@ class _TodoItemState extends State<TodoItem> {
                         setState(() {
                           _error = textController.text.isEmpty ? true : false;
                           if (!_error) {
-                            // context.read<TodoListCubit>().editTodo(
-                            //       widget.todo.id,
-                            //       textController.text,
-                            //       widget.todo.completed,
-                            //     );
                             context.read<TodoListBloc>().add(EditTodoEvent(
                                   id: widget.todo.id,
                                   description: textController.text,
@@ -231,7 +241,6 @@ class _TodoItemState extends State<TodoItem> {
       leading: Checkbox(
         value: widget.todo.completed,
         onChanged: (bool? checked) {
-          //context.read<TodoListBloc>().toggleTodo(widget.todo);
           context.read<TodoListBloc>().add(ToggleTodoEvent(todo: widget.todo));
         },
       ),

@@ -64,8 +64,10 @@ class _SigninPageState extends State<SigninPage> {
                         TextFormField(
                           keyboardType: TextInputType.emailAddress,
                           autocorrect: false,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
                             filled: true,
                             labelText: 'Email',
                             prefixIcon: Icon(Icons.email),
@@ -86,8 +88,10 @@ class _SigninPageState extends State<SigninPage> {
                         const SizedBox(height: 20.0),
                         TextFormField(
                           obscureText: true,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
                             filled: true,
                             labelText: 'Password',
                             prefixIcon: Icon(Icons.lock),
@@ -116,11 +120,11 @@ class _SigninPageState extends State<SigninPage> {
                                   ? 'Loading...'
                                   : 'Sign in'),
                           style: ElevatedButton.styleFrom(
-                            textStyle: const TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                            ),
                             padding: const EdgeInsets.symmetric(vertical: 10.0),
+                            shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(30.0),
+                            ),
+                            elevation: 10,
                           ),
                         ),
                         const SizedBox(height: 10.0),
@@ -136,10 +140,12 @@ class _SigninPageState extends State<SigninPage> {
                                     },
                           child: const Text('Not a member? Sign Up!'),
                           style: TextButton.styleFrom(
-                            textStyle: const TextStyle(
-                              fontSize: 20.0,
-                              decoration: TextDecoration.underline,
-                            ),
+                            textStyle:
+                                Theme.of(context).textTheme.button?.merge(
+                                      TextStyle(
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                    ),
                           ),
                         ),
                       ],

@@ -1,10 +1,7 @@
-import 'package:first_bloc/blocs/active_todo_count/active_todo_count_bloc.dart';
 import 'package:first_bloc/blocs/blocs.dart';
 import 'package:first_bloc/models/todo_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-//import '../../cubits/cubits.dart';
 
 class TodoHeader extends StatelessWidget {
   const TodoHeader({Key? key}) : super(key: key);

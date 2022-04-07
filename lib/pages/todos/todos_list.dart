@@ -1,8 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_bloc/blocs/blocs.dart';
 import 'package:first_bloc/models/todo_model.dart';
 import 'package:first_bloc/pages/todos/create_todo.dart';
 import 'package:first_bloc/pages/todos/show_todos.dart';
-import 'package:first_bloc/widgets/bottom_bar.dart';
+import 'package:first_bloc/pages/user/settings_page.dart';
 import 'package:first_bloc/widgets/search_todo.dart';
 import 'package:first_bloc/widgets/todo_header.dart';
 import 'package:flutter/material.dart';
@@ -28,11 +29,11 @@ class TodosList extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) {
-                  return const BottomBar();
+                  return const SettingsPage();
                 }),
               );
             },
-            icon: const Icon(Icons.account_circle),
+            icon: const Icon(Icons.settings),
           ),
           IconButton(
             onPressed: () {
@@ -44,6 +45,8 @@ class TodosList extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
+        //Need expanded here to avoid issue render overflow
+        //child: Expanded(
         child: Column(
           children: [
             const SizedBox(height: 20),
@@ -55,6 +58,7 @@ class TodosList extends StatelessWidget {
           ],
         ),
       ),
+      //),
     );
   }
 }
