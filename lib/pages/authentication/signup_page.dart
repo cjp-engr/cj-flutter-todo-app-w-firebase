@@ -1,6 +1,7 @@
 import 'package:first_bloc/blocs/blocs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rive/rive.dart';
 import 'package:validators/validators.dart';
 
 import '../../utils/error_dialog.dart';
@@ -19,6 +20,21 @@ class _SignupPageState extends State<SignupPage> {
   AutovalidateMode _autovalidateMode = AutovalidateMode.disabled;
   final _passwordController = TextEditingController();
   String? _name, _email, _password;
+  late RiveAnimationController _controller;
+
+  void _togglePlay() => _controller.isActive = !_controller.isActive;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = SimpleAnimation('idle');
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   void _submit() {
     setState(() {
@@ -29,6 +45,7 @@ class _SignupPageState extends State<SignupPage> {
 
     if (form == null || !form.validate()) return;
 
+    _togglePlay();
     form.save();
 
     print('name: $_name, email: $_email, password: $_password');
@@ -64,12 +81,17 @@ class _SignupPageState extends State<SignupPage> {
                     shrinkWrap: true,
                     reverse: true,
                     children: [
-                      Image.asset(
-                        'assets/images/flutter_logo.png',
-                        width: 250,
-                        height: 250,
+                      Container(
+                        child: RiveAnimation.asset(
+                          'assets/images/animated_login_screen.riv',
+                          animations: ['success'],
+                          fit: BoxFit.cover,
+                          controllers: [_controller],
+                        ),
+                        width: double.infinity,
+                        height: 300,
                       ),
-                      const SizedBox(height: 20.0),
+                      //const SizedBox(height: 20.0),
                       TextFormField(
                         decoration: InputDecoration(
                           border: OutlineInputBorder(

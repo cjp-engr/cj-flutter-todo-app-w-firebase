@@ -2,6 +2,7 @@ import 'package:first_bloc/blocs/blocs.dart';
 import 'package:first_bloc/pages/authentication/signup_page.dart';
 import 'package:first_bloc/utils/error_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:rive/rive.dart';
 import 'package:validators/validators.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,6 +18,21 @@ class _SigninPageState extends State<SigninPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   AutovalidateMode _autovalidateMode = AutovalidateMode.disabled;
   String? _email, _password;
+  late RiveAnimationController _controller;
+
+  void _togglePlay() => _controller.isActive = !_controller.isActive;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = SimpleAnimation('idle');
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   void _submit() {
     setState(() {
@@ -25,9 +41,12 @@ class _SigninPageState extends State<SigninPage> {
 
     final form = _formKey.currentState;
 
-    if (form == null || !form.validate()) return;
-
+    if (form == null || !form.validate()) {
+      return;
+    }
+    _togglePlay();
     form.save();
+
     print('email: $_email, password: $_password');
     context.read<SigninCubit>().signin(email: _email!, password: _password!);
   }
@@ -55,12 +74,18 @@ class _SigninPageState extends State<SigninPage> {
                     child: ListView(
                       shrinkWrap: true,
                       children: [
-                        Image.asset(
-                          'assets/images/flutter_logo.png',
-                          width: 250,
-                          height: 250,
+                        Container(
+                          child: RiveAnimation.asset(
+                            'assets/images/animated_login_screen.riv',
+                            animations: ['success'],
+                            fit: BoxFit.cover,
+                            controllers: [_controller],
+                          ),
+                          width: double.infinity,
+                          height: 300,
                         ),
-                        const SizedBox(height: 20.0),
+
+                        //const SizedBox(height: 10.0),
                         TextFormField(
                           keyboardType: TextInputType.emailAddress,
                           autocorrect: false,
