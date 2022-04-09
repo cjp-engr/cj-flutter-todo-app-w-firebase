@@ -4,6 +4,7 @@ import 'package:first_bloc/models/todo_model.dart';
 import 'package:first_bloc/pages/todos/create_todo.dart';
 import 'package:first_bloc/pages/todos/show_todos.dart';
 import 'package:first_bloc/pages/user/settings_page.dart';
+import 'package:first_bloc/widgets/logout_show_dialog.dart';
 import 'package:first_bloc/widgets/search_todo.dart';
 import 'package:first_bloc/widgets/todo_header.dart';
 import 'package:flutter/material.dart';
@@ -37,28 +38,7 @@ class TodosList extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (context) {
-                  return AlertDialog(
-                    title: const Text('Are you sure?'),
-                    content: const Text('Do you really want to logout?'),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, false),
-                        child: const Text('NO'),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          context.read<AuthBloc>().add(SignoutRequestedEvent());
-                        },
-                        child: const Text('YES'),
-                      ),
-                    ],
-                  );
-                },
-              );
+              logoutShowDialog(context);
             },
             icon: const Icon(Icons.exit_to_app),
           ),

@@ -89,46 +89,57 @@ class MyApp extends StatelessWidget {
               initialTodos: context.read<TodoListBloc>().state.todos,
             ),
           ),
-        ],
-        child: MaterialApp(
-          title: 'Flutter Demo',
-          debugShowCheckedModeBanner: false,
-          home: const SplashPage(),
-          routes: {
-            SignupPage.routeName: (context) => const SignupPage(),
-            SigninPage.routeName: (context) => const SigninPage(),
-            HomePage.routeName: (context) => const HomePage(),
-          },
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            textTheme: const TextTheme(
-              headline1: TextStyle(
-                fontSize: 100.0,
-                fontWeight: FontWeight.bold,
-              ),
-              headline6: TextStyle(
-                fontSize: 30.0,
-              ),
-              bodyText1: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-              ),
-              bodyText2: TextStyle(
-                fontSize: 18.0,
-                height: 1.5,
-                fontWeight: FontWeight.w500,
-              ),
-              caption: TextStyle(
-                fontSize: 12.0,
-                fontWeight: FontWeight.bold,
-              ),
-              button: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            fontFamily: 'Righteous',
+          BlocProvider<ThemeBloc>(
+            create: (context) => ThemeBloc(),
           ),
+        ],
+        child: BlocBuilder<ThemeBloc, ThemeState>(
+          builder: (context, state) {
+            return MaterialApp(
+              title: 'Flutter Demo',
+              debugShowCheckedModeBanner: false,
+              home: const SplashPage(),
+              routes: {
+                SignupPage.routeName: (context) => const SignupPage(),
+                SigninPage.routeName: (context) => const SigninPage(),
+                HomePage.routeName: (context) => const HomePage(),
+              },
+              theme: (state.isThemeLightSwitch == false
+                      ? ThemeData.dark()
+                      : ThemeData.light())
+                  .copyWith(
+                textTheme: const TextTheme(
+                  headline1: TextStyle(
+                    fontSize: 100.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  headline6: TextStyle(
+                    fontSize: 30.0,
+                  ),
+                  bodyText1: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  bodyText2: TextStyle(
+                    fontSize: 18.0,
+                    height: 1.5,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  caption: TextStyle(
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  button: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ).apply(
+                  fontFamily: 'Righteous',
+                  bodyColor: Colors.deepOrangeAccent,
+                ),
+              ),
+            );
+          },
         ),
       ),
     );

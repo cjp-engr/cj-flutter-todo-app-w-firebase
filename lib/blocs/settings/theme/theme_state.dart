@@ -1,3 +1,31 @@
 part of 'theme_bloc.dart';
 
-class ThemeState {}
+enum AppTheme {
+  dark,
+  light,
+}
+
+class ThemeState extends Equatable {
+  final bool isThemeLightSwitch;
+  ThemeState({
+    this.isThemeLightSwitch = false,
+  });
+
+  factory ThemeState.initial() {
+    return ThemeState();
+  }
+
+  @override
+  List<Object?> get props => [isThemeLightSwitch];
+
+  @override
+  String toString() => 'ThemeState(isThemeLightSwitch: $isThemeLightSwitch)';
+
+  ThemeState copyWith({
+    bool? isThemeLightSwitch,
+  }) {
+    return ThemeState(
+      isThemeLightSwitch: isThemeLightSwitch ?? this.isThemeLightSwitch,
+    );
+  }
+}
