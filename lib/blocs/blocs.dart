@@ -9,3 +9,4 @@ export 'todos/todo_list/todo_list_bloc.dart';
 export 'todos/todo_search/todo_search_bloc.dart';
 export 'settings/theme/theme_bloc.dart';
 export 'settings/font_size/font_size_bloc.dart';
+export 'settings/card_size/card_size_bloc.dart';

@@ -96,6 +96,12 @@ class MyApp extends StatelessWidget {
           BlocProvider<FontSizeBloc>(
             create: (context) => FontSizeBloc(),
           ),
+          BlocProvider<CardSizeBloc>(
+            create: (context) => CardSizeBloc(
+              fontSizeBloc: BlocProvider.of<FontSizeBloc>(context),
+              initialFontSize: context.read<FontSizeBloc>().state.fontSize,
+            ),
+          ),
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, state) {

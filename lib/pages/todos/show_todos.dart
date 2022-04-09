@@ -1,4 +1,5 @@
 import 'package:first_bloc/blocs/blocs.dart';
+import 'package:first_bloc/constants/db_constants.dart';
 import 'package:first_bloc/models/todo_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +17,6 @@ class ShowTodos extends StatelessWidget {
     switch (filter) {
       case Filter.active:
         _filteredTodos = todos.where((Todo todo) => !todo.completed).toList();
-
         break;
       case Filter.completed:
         _filteredTodos = todos.where((Todo todo) => todo.completed).toList();
@@ -40,6 +40,8 @@ class ShowTodos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final todos = context.watch<FilteredTodosBloc>().state.filteredTodos;
+    final fontSize = context.watch<FontSizeBloc>().state.fontSize;
+
     return MultiBlocListener(
       listeners: [
         BlocListener<TodoListBloc, TodoListState>(
@@ -128,7 +130,7 @@ class ShowTodos extends StatelessWidget {
               child: Card(
                 //child: TodoItem(todo: todos[index]),
                 child: Container(
-                  height: 80,
+                  height: context.watch<CardSizeBloc>().state.cardSize,
                   padding: const EdgeInsets.only(
                     left: 16.0,
                     right: 16.0,
@@ -144,7 +146,6 @@ class ShowTodos extends StatelessWidget {
           },
           separatorBuilder: (BuildContext context, int index) {
             return const Divider(
-              //color: Colors.grey,
               height: 7,
             );
           },
