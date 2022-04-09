@@ -29,7 +29,7 @@ class TodoHeader extends StatelessWidget {
             builder: (context, state) {
               return Text(
                 '${state.activeTodoCount} items left',
-                style: const TextStyle(fontSize: 20.0, color: Colors.redAccent),
+                style: Theme.of(context).textTheme.bodyText1,
               );
             },
           ),

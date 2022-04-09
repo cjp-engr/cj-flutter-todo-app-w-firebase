@@ -84,27 +84,32 @@ class _ProfilePageState extends State<ProfilePage> {
                       Text(
                         ''
                         '-id: ${state.user.id}',
-                        style: const TextStyle(fontSize: 18.0),
+                        style: Theme.of(context).textTheme.bodyText1,
+                        //style: const TextStyle(fontSize: 18.0),
                       ),
                       const SizedBox(height: 10.0),
                       Text(
                         '- name: ${state.user.name}',
-                        style: const TextStyle(fontSize: 18.0),
+                        style: Theme.of(context).textTheme.bodyText1,
+                        //style: const TextStyle(fontSize: 18.0),
                       ),
                       const SizedBox(height: 10.0),
                       Text(
                         '- email: ${state.user.email}',
-                        style: const TextStyle(fontSize: 18.0),
+                        style: Theme.of(context).textTheme.bodyText1,
+                        //style: const TextStyle(fontSize: 18.0),
                       ),
                       const SizedBox(height: 10.0),
                       Text(
                         '- point: ${state.user.point}',
-                        style: const TextStyle(fontSize: 18.0),
+                        style: Theme.of(context).textTheme.bodyText1,
+                        //style: const TextStyle(fontSize: 18.0),
                       ),
                       const SizedBox(height: 10.0),
                       Text(
                         '- rank: ${state.user.rank}',
-                        style: const TextStyle(fontSize: 18.0),
+                        style: Theme.of(context).textTheme.bodyText1,
+                        //style: const TextStyle(fontSize: 18.0),
                       ),
                     ],
                   ),

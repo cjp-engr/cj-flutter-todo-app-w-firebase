@@ -70,7 +70,6 @@ class _SignupPageState extends State<SignupPage> {
         },
         builder: (context, state) {
           return Scaffold(
-            backgroundColor: Colors.white,
             body: Center(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -113,6 +112,7 @@ class _SignupPageState extends State<SignupPage> {
                         onSaved: (String? value) {
                           _name = value;
                         },
+                        style: Theme.of(context).textTheme.bodyText1,
                       ),
                       const SizedBox(height: 20.0),
                       TextFormField(
@@ -138,6 +138,7 @@ class _SignupPageState extends State<SignupPage> {
                         onSaved: (String? value) {
                           _email = value;
                         },
+                        style: Theme.of(context).textTheme.bodyText1,
                       ),
                       const SizedBox(height: 20.0),
                       TextFormField(
@@ -163,6 +164,7 @@ class _SignupPageState extends State<SignupPage> {
                         onSaved: (String? value) {
                           _password = value;
                         },
+                        style: Theme.of(context).textTheme.bodyText1,
                       ),
                       const SizedBox(height: 20.0),
                       TextFormField(
@@ -181,6 +183,7 @@ class _SignupPageState extends State<SignupPage> {
                           }
                           return null;
                         },
+                        style: Theme.of(context).textTheme.bodyText1,
                       ),
                       const SizedBox(height: 20.0),
                       ElevatedButton(

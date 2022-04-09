@@ -27,14 +27,16 @@ class _BottomBarState extends State<BottomBar> {
 
   @override
   Widget build(BuildContext context) {
+    final isThemeLightSwitch =
+        context.watch<ThemeBloc>().state.isThemeLightSwitch;
     return Scaffold(
-      backgroundColor: Colors.white,
+      //backgroundColor: Colors.white,
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          //color: Colors.white,
           boxShadow: [
             BoxShadow(
               blurRadius: 20,
@@ -53,16 +55,14 @@ class _BottomBarState extends State<BottomBar> {
               iconSize: 24,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               duration: const Duration(milliseconds: 400),
-              tabBackgroundColor: Colors.grey[100]!,
-              color: Colors.black,
+              tabBackgroundColor:
+                  isThemeLightSwitch ? Color(0xffE6D5B8) : Color(0xff395B64),
+              color: isThemeLightSwitch ? Color(0xff395B64) : Color(0xffE6D5B8),
               tabs: [
                 filterButton(context, Filter.all),
                 filterButton(context, Filter.active),
                 filterButton(context, Filter.completed),
-                const GButton(
-                  icon: Icons.account_circle_rounded,
-                  text: 'Profile',
-                ),
+                profileIcon(context),
               ],
               selectedIndex: _selectedIndex,
               onTabChange: (index) {
@@ -96,17 +96,21 @@ class _BottomBarState extends State<BottomBar> {
             .add(ChangeFilterEvent(newFilter: filter));
       },
       textStyle: TextStyle(
-        fontSize: 12.0,
-        color: textColor(context, filter),
+        fontSize: 18.0,
+        //color: textColor(context, filter),
+        fontFamily: 'Righteous',
       ),
     );
   }
 
   profileIcon(BuildContext context) {
     return const GButton(
+      text: 'Profile',
       icon: Icons.account_circle,
       textStyle: TextStyle(
-        fontSize: 12.0,
+        fontSize: 18.0,
+        fontFamily: 'Righteous',
+        //color: Colors.blue,
       ),
     );
   }

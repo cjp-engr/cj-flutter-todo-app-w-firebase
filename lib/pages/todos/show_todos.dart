@@ -40,6 +40,8 @@ class ShowTodos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final todos = context.watch<FilteredTodosBloc>().state.filteredTodos;
+    final isThemeLightSwitch =
+        context.watch<ThemeBloc>().state.isThemeLightSwitch;
     return MultiBlocListener(
       listeners: [
         BlocListener<TodoListBloc, TodoListState>(
@@ -101,8 +103,14 @@ class ShowTodos extends StatelessWidget {
                   barrierDismissible: false,
                   builder: (context) {
                     return AlertDialog(
-                      title: const Text('Are you sure?'),
-                      content: const Text('Do you really want to delete?'),
+                      title: Text(
+                        'Are you sure?',
+                        style: Theme.of(context).textTheme.headline5,
+                      ),
+                      content: Text(
+                        'Do you really want to delete?',
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context, false),
@@ -133,6 +141,8 @@ class ShowTodos extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(14),
                 ),
+                color:
+                    isThemeLightSwitch ? Color(0xffE6D5B8) : Color(0xff395B64),
               ),
             );
           },
@@ -201,13 +211,17 @@ class _TodoItemState extends State<TodoItem> {
             return StatefulBuilder(
               builder: (BuildContext context, StateSetter setState) {
                 return AlertDialog(
-                  title: const Text('Edit Todo'),
+                  title: Text(
+                    'Edit Todo',
+                    style: Theme.of(context).textTheme.headline5,
+                  ),
                   content: TextField(
                     controller: textController,
                     autofocus: true,
                     decoration: InputDecoration(
                       errorText: _error ? "Value cannot be empty" : null,
                     ),
+                    style: Theme.of(context).textTheme.bodyText1,
                   ),
                   actions: [
                     TextButton(
@@ -246,7 +260,7 @@ class _TodoItemState extends State<TodoItem> {
       ),
       title: Text(
         widget.todo.description,
-        style: Theme.of(context).textTheme.bodyText2,
+        style: Theme.of(context).textTheme.bodyText1,
       ),
     );
   }

@@ -39,7 +39,10 @@ class SettingsPage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Dark/Light theme'),
+              Text(
+                'Dark/Light theme',
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
               Switch(
                 value: isThemeLightSwitch,
                 onChanged: (value) {

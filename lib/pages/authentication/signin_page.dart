@@ -109,6 +109,7 @@ class _SigninPageState extends State<SigninPage> {
                           onSaved: (String? value) {
                             _email = value;
                           },
+                          style: Theme.of(context).textTheme.bodyText1,
                         ),
                         const SizedBox(height: 20.0),
                         TextFormField(
@@ -133,6 +134,7 @@ class _SigninPageState extends State<SigninPage> {
                           onSaved: (String? value) {
                             _password = value;
                           },
+                          style: Theme.of(context).textTheme.bodyText1,
                         ),
                         const SizedBox(height: 20.0),
                         ElevatedButton(

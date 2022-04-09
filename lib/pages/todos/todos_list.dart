@@ -19,11 +19,14 @@ class TodosList extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: filter == Filter.all
-            ? const Text('All Todos')
-            : filter == Filter.active
-                ? const Text('Active Todos')
-                : const Text('Completed Todos'),
+        title: Text(
+          filter == Filter.all
+              ? 'All Todos'
+              : filter == Filter.active
+                  ? 'Active Todos'
+                  : 'Completed Todos',
+          style: Theme.of(context).textTheme.headline5,
+        ),
         actions: [
           IconButton(
             onPressed: () {

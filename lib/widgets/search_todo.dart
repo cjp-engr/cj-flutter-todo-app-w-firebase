@@ -27,6 +27,7 @@ class SearchTodo extends StatelessWidget {
               });
             }
           },
+          style: Theme.of(context).textTheme.bodyText1,
         ),
         const SizedBox(height: 10.0),
       ],

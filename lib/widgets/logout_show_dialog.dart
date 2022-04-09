@@ -8,8 +8,14 @@ Future logoutShowDialog(BuildContext context) {
     barrierDismissible: false,
     builder: (context) {
       return AlertDialog(
-        title: const Text('Are you sure?'),
-        content: const Text('Do you really want to logout?'),
+        title: Text(
+          'Are you sure?',
+          style: Theme.of(context).textTheme.headline5,
+        ),
+        content: Text(
+          'Do you really want to logout?',
+          style: Theme.of(context).textTheme.bodyText1,
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),

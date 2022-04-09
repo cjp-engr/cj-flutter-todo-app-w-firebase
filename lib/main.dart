@@ -104,38 +104,34 @@ class MyApp extends StatelessWidget {
                 SigninPage.routeName: (context) => const SigninPage(),
                 HomePage.routeName: (context) => const HomePage(),
               },
-              theme: (state.isThemeLightSwitch == false
-                      ? ThemeData.dark()
-                      : ThemeData.light())
+              theme: (state.isThemeLightSwitch == true
+                      ? ThemeData.light()
+                      : ThemeData.dark())
                   .copyWith(
                 textTheme: const TextTheme(
-                  headline1: TextStyle(
-                    fontSize: 100.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  headline6: TextStyle(
-                    fontSize: 30.0,
+                  button: TextStyle(
+                    fontSize: 20.0,
+                    //fontWeight: FontWeight.bold,
                   ),
                   bodyText1: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 21.0,
                   ),
                   bodyText2: TextStyle(
                     fontSize: 18.0,
-                    height: 1.5,
-                    fontWeight: FontWeight.w500,
                   ),
-                  caption: TextStyle(
-                    fontSize: 12.0,
+                  headline5: TextStyle(
+                    fontSize: 24.0,
                     fontWeight: FontWeight.bold,
                   ),
-                  button: TextStyle(
-                    fontSize: 20.0,
+                  headline6: TextStyle(
+                    fontSize: 22.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ).apply(
                   fontFamily: 'Righteous',
-                  bodyColor: Colors.deepOrangeAccent,
+                  bodyColor: state.isThemeLightSwitch == true
+                      ? Color(0xff395B64)
+                      : Color(0xffF0A500),
                 ),
               ),
             );

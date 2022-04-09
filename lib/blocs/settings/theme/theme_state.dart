@@ -8,7 +8,7 @@ enum AppTheme {
 class ThemeState extends Equatable {
   final bool isThemeLightSwitch;
   ThemeState({
-    this.isThemeLightSwitch = false,
+    this.isThemeLightSwitch = true,
   });
 
   factory ThemeState.initial() {

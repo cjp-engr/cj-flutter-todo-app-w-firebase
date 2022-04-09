@@ -30,6 +30,7 @@ class _CreateTodoState extends State<CreateTodo> {
           newTodoController.clear();
         }
       },
+      style: Theme.of(context).textTheme.bodyText1,
     );
   }
 }
