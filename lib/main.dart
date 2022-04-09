@@ -93,6 +93,9 @@ class MyApp extends StatelessWidget {
           BlocProvider<ThemeBloc>(
             create: (context) => ThemeBloc(),
           ),
+          BlocProvider<FontSizeBloc>(
+            create: (context) => FontSizeBloc(),
+          ),
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, state) {

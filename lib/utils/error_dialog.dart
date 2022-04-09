@@ -8,7 +8,7 @@ import '../models/custom_error.dart';
 void errorDialog(BuildContext context, CustomError e) {
   print('code: ${e.code}\nmessage: ${e.message}\nplugin: ${e.plugin}\n');
 
-  if (!Platform.isIOS) {
+  if (Platform.isIOS) {
     showCupertinoDialog(
       context: context,
       builder: (context) {

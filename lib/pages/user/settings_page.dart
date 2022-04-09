@@ -11,6 +11,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final isThemeLightSwitch =
         context.watch<ThemeBloc>().state.isThemeLightSwitch;
+    final fontSize = context.watch<FontSizeBloc>().state.fontSize;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -54,7 +55,40 @@ class SettingsPage extends StatelessWidget {
                 },
               ),
             ],
-          )
+          ),
+          SizedBox(
+            height: 40,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 50,
+                child: Text(
+                  'Font Size',
+                  style: Theme.of(context).textTheme.bodyText1!.merge(
+                        TextStyle(
+                          fontSize: fontSize,
+                        ),
+                      ),
+                ),
+              ),
+              Slider(
+                value: fontSize,
+                min: 20,
+                max: 35,
+                divisions: 5,
+                label: fontSize.round().toString(),
+                onChanged: (double value) {
+                  context.read<FontSizeBloc>().add(
+                        ChangeFontSizeEvent(
+                          fontSize: value,
+                        ),
+                      );
+                },
+              ),
+            ],
+          ),
         ],
       ),
     );

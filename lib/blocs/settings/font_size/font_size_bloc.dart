@@ -5,9 +5,9 @@ part 'font_size_event.dart';
 part 'font_size_state.dart';
 
 class FontSizeBloc extends Bloc<FontSizeEvent, FontSizeState> {
-  FontSizeBloc() : super(FontSizeInitial()) {
-    on<FontSizeEvent>((event, emit) {
-      // TODO: implement event handler
+  FontSizeBloc() : super(FontSizeState.initial()) {
+    on<ChangeFontSizeEvent>((event, emit) {
+      emit(state.copyWith(fontSize: event.fontSize));
     });
   }
 }

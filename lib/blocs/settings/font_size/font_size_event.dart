@@ -6,3 +6,10 @@ abstract class FontSizeEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class ChangeFontSizeEvent extends FontSizeEvent {
+  final double fontSize;
+  ChangeFontSizeEvent({
+    required this.fontSize,
+  });
+}
