@@ -90,12 +90,10 @@ class _SigninPageState extends State<SigninPage> {
                           keyboardType: TextInputType.emailAddress,
                           autocorrect: false,
                           decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            filled: true,
                             labelText: 'Email',
-                            prefixIcon: Icon(Icons.email),
+                            prefixIcon: Icon(
+                              Icons.email,
+                            ),
                           ),
                           validator: (String? value) {
                             if (value == null || value.trim().isEmpty) {
@@ -115,9 +113,6 @@ class _SigninPageState extends State<SigninPage> {
                         TextFormField(
                           obscureText: true,
                           decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
                             filled: true,
                             labelText: 'Password',
                             prefixIcon: Icon(Icons.lock),
@@ -146,13 +141,6 @@ class _SigninPageState extends State<SigninPage> {
                               state.signinStatus == SigninStatus.submitting
                                   ? 'Loading...'
                                   : 'Sign in'),
-                          style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 10.0),
-                            shape: new RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(30.0),
-                            ),
-                            elevation: 10,
-                          ),
                         ),
                         const SizedBox(height: 10.0),
                         TextButton(
@@ -166,14 +154,6 @@ class _SigninPageState extends State<SigninPage> {
                                       );
                                     },
                           child: const Text('Not a member? Sign Up!'),
-                          style: TextButton.styleFrom(
-                            textStyle:
-                                Theme.of(context).textTheme.button?.merge(
-                                      TextStyle(
-                                        decoration: TextDecoration.underline,
-                                      ),
-                                    ),
-                          ),
                         ),
                       ],
                     ),

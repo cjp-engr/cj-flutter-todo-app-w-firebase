@@ -93,10 +93,6 @@ class _SignupPageState extends State<SignupPage> {
                       //const SizedBox(height: 20.0),
                       TextFormField(
                         decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          filled: true,
                           labelText: 'Name',
                           prefixIcon: Icon(Icons.account_box),
                         ),
@@ -119,10 +115,6 @@ class _SignupPageState extends State<SignupPage> {
                         keyboardType: TextInputType.emailAddress,
                         autocorrect: false,
                         decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          filled: true,
                           labelText: 'Email',
                           prefixIcon: Icon(Icons.email),
                         ),
@@ -145,10 +137,6 @@ class _SignupPageState extends State<SignupPage> {
                         controller: _passwordController,
                         obscureText: true,
                         decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          filled: true,
                           labelText: 'Password',
                           prefixIcon: Icon(Icons.lock),
                         ),
@@ -170,10 +158,6 @@ class _SignupPageState extends State<SignupPage> {
                       TextFormField(
                         obscureText: true,
                         decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          filled: true,
                           labelText: 'Confirm password',
                           prefixIcon: Icon(Icons.lock),
                         ),
@@ -190,15 +174,6 @@ class _SignupPageState extends State<SignupPage> {
                         onPressed: state.signupStatus == SignupStatus.submitting
                             ? null
                             : _submit,
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 10.0,
-                          ),
-                          shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(30.0),
-                          ),
-                          elevation: 10,
-                        ),
                         child: Text(
                           state.signupStatus == SignupStatus.submitting
                               ? 'Loading...'
@@ -212,13 +187,6 @@ class _SignupPageState extends State<SignupPage> {
                             : () {
                                 Navigator.pop(context);
                               },
-                        style: TextButton.styleFrom(
-                          textStyle: Theme.of(context).textTheme.button?.merge(
-                                TextStyle(
-                                  decoration: TextDecoration.underline,
-                                ),
-                              ),
-                        ),
                         child: const Text('Already a member? Sign in!'),
                       ),
                     ].reversed.toList(),

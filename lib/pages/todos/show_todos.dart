@@ -40,8 +40,8 @@ class ShowTodos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final todos = context.watch<FilteredTodosBloc>().state.filteredTodos;
-    final isThemeLightSwitch =
-        context.watch<ThemeBloc>().state.isThemeLightSwitch;
+    // final isThemeLightSwitch =
+    //     context.watch<ThemeBloc>().state.isThemeLightSwitch;
     return MultiBlocListener(
       listeners: [
         BlocListener<TodoListBloc, TodoListState>(
@@ -141,8 +141,8 @@ class ShowTodos extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(14),
                 ),
-                color:
-                    isThemeLightSwitch ? Color(0xffE6D5B8) : Color(0xff395B64),
+                // color:
+                //     isThemeLightSwitch ? Color(0xffE6D5B8) : Color(0xff395B64),
               ),
             );
           },

@@ -1,4 +1,5 @@
 import 'package:first_bloc/blocs/blocs.dart';
+import 'package:first_bloc/constants/db_constants.dart';
 import 'package:first_bloc/models/todo_model.dart';
 import 'package:first_bloc/pages/todos/active_todos.dart';
 import 'package:first_bloc/pages/user/profile_page.dart';
@@ -56,8 +57,8 @@ class _BottomBarState extends State<BottomBar> {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               duration: const Duration(milliseconds: 400),
               tabBackgroundColor:
-                  isThemeLightSwitch ? Color(0xffE6D5B8) : Color(0xff395B64),
-              color: isThemeLightSwitch ? Color(0xff395B64) : Color(0xffE6D5B8),
+                  isThemeLightSwitch ? themeLightColor : themeDarkColor,
+              color: !isThemeLightSwitch ? themeLightColor : themeDarkColor,
               tabs: [
                 filterButton(context, Filter.all),
                 filterButton(context, Filter.active),
