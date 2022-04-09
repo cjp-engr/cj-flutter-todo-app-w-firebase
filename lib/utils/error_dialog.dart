@@ -29,8 +29,14 @@ void errorDialog(BuildContext context, CustomError e) {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text(e.code),
-          content: Text(e.plugin + '\n' + e.message),
+          title: Text(
+            e.code,
+            style: Theme.of(context).textTheme.headline5,
+          ),
+          content: Text(
+            e.plugin + '\n' + e.message,
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
           actions: [
             TextButton(
               child: const Text('OK'),

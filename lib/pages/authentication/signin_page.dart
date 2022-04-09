@@ -18,25 +18,29 @@ class _SigninPageState extends State<SigninPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   AutovalidateMode _autovalidateMode = AutovalidateMode.disabled;
   String? _email, _password;
-  late RiveAnimationController _controller;
+  late RiveAnimationController _controller1;
 
-  void _togglePlay() => _controller.isActive = !_controller.isActive;
+  //void _togglePlay() => _controller1.isActive = !_controller1.isActive;
 
   @override
   void initState() {
     super.initState();
-    _controller = SimpleAnimation('idle');
+    //_controller1 = SimpleAnimation('idle');
+
+    _controller1 = OneShotAnimation('idle');
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller1.dispose();
+
     super.dispose();
   }
 
   void _submit() {
     setState(() {
       _autovalidateMode = AutovalidateMode.always;
+      _controller1.isActive = false;
     });
 
     final form = _formKey.currentState;
@@ -44,7 +48,7 @@ class _SigninPageState extends State<SigninPage> {
     if (form == null || !form.validate()) {
       return;
     }
-    _togglePlay();
+
     form.save();
 
     print('email: $_email, password: $_password');
@@ -60,6 +64,7 @@ class _SigninPageState extends State<SigninPage> {
         child: BlocConsumer<SigninCubit, SigninState>(
           listener: (context, state) {
             if (state.signinStatus == SigninStatus.error) {
+              _controller1.isActive = true;
               errorDialog(context, state.error);
             }
           },
@@ -79,7 +84,7 @@ class _SigninPageState extends State<SigninPage> {
                             'assets/images/animated_login_screen.riv',
                             animations: ['success'],
                             fit: BoxFit.cover,
-                            controllers: [_controller],
+                            controllers: [_controller1],
                           ),
                           width: double.infinity,
                           height: 300,
