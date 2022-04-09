@@ -20,32 +20,35 @@ class _SignupPageState extends State<SignupPage> {
   AutovalidateMode _autovalidateMode = AutovalidateMode.disabled;
   final _passwordController = TextEditingController();
   String? _name, _email, _password;
-  late RiveAnimationController _controller;
+  late RiveAnimationController _controller1;
 
-  void _togglePlay() => _controller.isActive = !_controller.isActive;
+  //void _togglePlay() => _controller.isActive = !_controller.isActive;
 
   @override
   void initState() {
     super.initState();
-    _controller = SimpleAnimation('idle');
+    _controller1 = OneShotAnimation('idle');
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller1.dispose();
     super.dispose();
   }
 
   void _submit() {
     setState(() {
       _autovalidateMode = AutovalidateMode.always;
+      _controller1.isActive = false;
     });
 
     final form = _formKey.currentState;
 
-    if (form == null || !form.validate()) return;
+    if (form == null || !form.validate()) {
+      _controller1.isActive = true;
+      return;
+    }
 
-    _togglePlay();
     form.save();
 
     print('name: $_name, email: $_email, password: $_password');
@@ -65,6 +68,7 @@ class _SignupPageState extends State<SignupPage> {
         listener: (context, state) {
           if (state.signupStatus == SignupStatus.error) {
             print('signup error');
+            _controller1.isActive = true;
             errorDialog(context, state.error);
           }
         },
@@ -85,12 +89,12 @@ class _SignupPageState extends State<SignupPage> {
                           'assets/images/animated_login_screen.riv',
                           animations: ['success'],
                           fit: BoxFit.cover,
-                          controllers: [_controller],
+                          controllers: [_controller1],
                         ),
                         width: double.infinity,
                         height: 300,
                       ),
-                      //const SizedBox(height: 20.0),
+                      const SizedBox(height: 5.0),
                       TextFormField(
                         decoration: InputDecoration(
                           labelText: 'Name',

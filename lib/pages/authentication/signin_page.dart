@@ -46,6 +46,7 @@ class _SigninPageState extends State<SigninPage> {
     final form = _formKey.currentState;
 
     if (form == null || !form.validate()) {
+      _controller1.isActive = true;
       return;
     }
 
@@ -89,8 +90,7 @@ class _SigninPageState extends State<SigninPage> {
                           width: double.infinity,
                           height: 300,
                         ),
-
-                        //const SizedBox(height: 10.0),
+                        const SizedBox(height: 5.0),
                         TextFormField(
                           keyboardType: TextInputType.emailAddress,
                           autocorrect: false,
