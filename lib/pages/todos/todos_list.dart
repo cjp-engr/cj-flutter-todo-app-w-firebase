@@ -37,7 +37,28 @@ class TodosList extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              context.read<AuthBloc>().add(SignoutRequestedEvent());
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text('Are you sure?'),
+                    content: const Text('Do you really want to logout?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, false),
+                        child: const Text('NO'),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          context.read<AuthBloc>().add(SignoutRequestedEvent());
+                        },
+                        child: const Text('YES'),
+                      ),
+                    ],
+                  );
+                },
+              );
             },
             icon: const Icon(Icons.exit_to_app),
           ),
