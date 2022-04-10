@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_bloc/constants/db_constants.dart';
-import 'package:first_bloc/models/custom_error.dart';
-import 'package:first_bloc/models/user_model.dart';
+import 'package:first_bloc/models/models.dart';
 
 class ProfileRepository {
   final FirebaseFirestore firebaseFirestore;

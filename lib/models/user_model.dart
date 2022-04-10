@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
-//In Firebase tutorial, the user model is first created
-
 class User extends Equatable {
   final String id;
   final String name;

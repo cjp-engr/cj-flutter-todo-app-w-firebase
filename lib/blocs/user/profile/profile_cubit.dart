@@ -1,8 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:first_bloc/models/custom_error.dart';
-import 'package:first_bloc/models/user_model.dart';
+import 'package:first_bloc/models/models.dart';
 import 'package:first_bloc/repositories/profile_repository.dart';
 
 part 'profile_state.dart';

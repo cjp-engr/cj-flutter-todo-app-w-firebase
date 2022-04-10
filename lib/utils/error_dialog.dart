@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../models/custom_error.dart';
+import 'package:first_bloc/models/models.dart';
 
 void errorDialog(BuildContext context, CustomError e) {
   print('code: ${e.code}\nmessage: ${e.message}\nplugin: ${e.plugin}\n');

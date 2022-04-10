@@ -81,13 +81,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        ''
-                        '-id: ${state.user.id}',
-                        style: Theme.of(context).textTheme.bodyText1,
-                        //style: const TextStyle(fontSize: 18.0),
-                      ),
-                      const SizedBox(height: 10.0),
+                      // Text(
+                      //   ''
+                      //   '-id: ${state.user.id}',
+                      //   style: Theme.of(context).textTheme.bodyText1,
+                      //   //style: const TextStyle(fontSize: 18.0),
+                      // ),
+                      // const SizedBox(height: 10.0),
                       Text(
                         '- name: ${state.user.name}',
                         style: Theme.of(context).textTheme.bodyText1,
