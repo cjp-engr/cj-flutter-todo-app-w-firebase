@@ -4,6 +4,8 @@ This application can be used to increase productivity, remember important things
 
 ![](https://github.com/cjp-engr/cj-flutter-project-files/blob/main/todo_app_with_firebase/todo-app.gif)
 
+https://github.com/cjp-engr/cj-flutter-project-files/tree/main/todo_app_with_firebase
+
 **Dependencies used:** <br />
   cloud_firestore: ^3.1.10 <br />
   cupertino_icons: ^1.0.2 <br />
