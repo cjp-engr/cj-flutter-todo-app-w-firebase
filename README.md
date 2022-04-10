@@ -1,4 +1,4 @@
-# todo app with firebase
+# Todo application with Firebase
 
 This application can be used to increase productivity, remember important things to do and can help manage and prioritize tasks effectively.
 
