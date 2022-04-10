@@ -105,7 +105,7 @@ class MyApp extends StatelessWidget {
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, state) {
-            Color getThemeColor(bool isThemeLight) {
+            Color _getThemeColor(bool isThemeLight) {
               if (isThemeLight) {
                 return themeLightColor;
               } else {
@@ -128,35 +128,35 @@ class MyApp extends StatelessWidget {
                   .copyWith(
                 //scaffoldBackgroundColor: Colors.red,
                 appBarTheme: AppBarTheme(
-                  color: getThemeColor(state.isThemeLightSwitch),
+                  color: _getThemeColor(state.isThemeLightSwitch),
                   iconTheme: IconThemeData(
-                    color: getThemeColor(!state.isThemeLightSwitch),
+                    color: _getThemeColor(!state.isThemeLightSwitch),
                   ),
                 ),
                 sliderTheme: SliderThemeData(
-                  activeTrackColor: getThemeColor(!state.isThemeLightSwitch),
-                  thumbColor: getThemeColor(!state.isThemeLightSwitch),
+                  activeTrackColor: _getThemeColor(!state.isThemeLightSwitch),
+                  thumbColor: _getThemeColor(!state.isThemeLightSwitch),
                 ),
                 switchTheme: SwitchThemeData(
                   thumbColor: MaterialStateProperty.all(
-                    getThemeColor(!state.isThemeLightSwitch),
+                    _getThemeColor(!state.isThemeLightSwitch),
                   ),
                 ),
                 checkboxTheme: CheckboxThemeData(
                   fillColor: MaterialStateProperty.all(
-                    getThemeColor(!state.isThemeLightSwitch),
+                    _getThemeColor(!state.isThemeLightSwitch),
                   ),
                   checkColor: MaterialStateProperty.all(
-                    getThemeColor(state.isThemeLightSwitch),
+                    _getThemeColor(state.isThemeLightSwitch),
                   ),
                 ),
                 cardTheme: CardTheme(
-                  color: getThemeColor(state.isThemeLightSwitch),
+                  color: _getThemeColor(state.isThemeLightSwitch),
                 ),
                 elevatedButtonTheme: ElevatedButtonThemeData(
                   style: ButtonStyle(
                     padding: MaterialStateProperty.all(
-                      EdgeInsets.symmetric(vertical: 10.0),
+                      EdgeInsets.symmetric(vertical: 15.0),
                     ),
                     shape: MaterialStateProperty.all(
                       RoundedRectangleBorder(
@@ -165,17 +165,17 @@ class MyApp extends StatelessWidget {
                     ),
                     elevation: MaterialStateProperty.all(10),
                     backgroundColor: MaterialStateProperty.all(
-                      getThemeColor(!state.isThemeLightSwitch),
+                      _getThemeColor(!state.isThemeLightSwitch),
                     ),
                     foregroundColor: MaterialStateProperty.all(
-                      getThemeColor(state.isThemeLightSwitch),
+                      _getThemeColor(state.isThemeLightSwitch),
                     ),
                   ),
                 ),
                 textButtonTheme: TextButtonThemeData(
                   style: ButtonStyle(
                     foregroundColor: MaterialStateProperty.all(
-                      getThemeColor(!state.isThemeLightSwitch),
+                      _getThemeColor(!state.isThemeLightSwitch),
                     ),
                   ),
                 ),
@@ -186,14 +186,14 @@ class MyApp extends StatelessWidget {
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                     borderSide: BorderSide(
-                      color: getThemeColor(!state.isThemeLightSwitch),
+                      color: _getThemeColor(!state.isThemeLightSwitch),
                     ),
                   ),
                   filled: true,
                   floatingLabelStyle: TextStyle(
-                    color: getThemeColor(!state.isThemeLightSwitch),
+                    color: _getThemeColor(!state.isThemeLightSwitch),
                   ),
-                  iconColor: getThemeColor(!state.isThemeLightSwitch),
+                  iconColor: _getThemeColor(!state.isThemeLightSwitch),
                 ),
                 textTheme: const TextTheme(
                   button: TextStyle(
@@ -215,7 +215,7 @@ class MyApp extends StatelessWidget {
                   ),
                 ).apply(
                   fontFamily: 'Righteous',
-                  bodyColor: getThemeColor(!state.isThemeLightSwitch),
+                  bodyColor: _getThemeColor(!state.isThemeLightSwitch),
                 ),
               ),
             );

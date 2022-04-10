@@ -1,6 +1,7 @@
 import 'package:first_bloc/blocs/blocs.dart';
 import 'package:first_bloc/pages/authentication/signup_page.dart';
 import 'package:first_bloc/utils/error_dialog.dart';
+import 'package:first_bloc/widgets/media_query.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 import 'package:validators/validators.dart';
@@ -20,13 +21,9 @@ class _SigninPageState extends State<SigninPage> {
   String? _email, _password;
   late RiveAnimationController _controller1;
 
-  //void _togglePlay() => _controller1.isActive = !_controller1.isActive;
-
   @override
   void initState() {
     super.initState();
-    //_controller1 = SimpleAnimation('idle');
-
     _controller1 = OneShotAnimation('idle');
   }
 
@@ -88,7 +85,9 @@ class _SigninPageState extends State<SigninPage> {
                             controllers: [_controller1],
                           ),
                           width: double.infinity,
-                          height: 300,
+                          height: mediaQueryLoginSignUpAnimation(
+                            context: context,
+                          ),
                         ),
                         const SizedBox(height: 5.0),
                         TextFormField(

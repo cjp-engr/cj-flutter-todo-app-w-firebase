@@ -1,4 +1,5 @@
 import 'package:first_bloc/blocs/blocs.dart';
+import 'package:first_bloc/widgets/media_query.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rive/rive.dart';
@@ -92,7 +93,9 @@ class _SignupPageState extends State<SignupPage> {
                           controllers: [_controller1],
                         ),
                         width: double.infinity,
-                        height: 300,
+                        height: mediaQueryLoginSignUpAnimation(
+                          context: context,
+                        ),
                       ),
                       const SizedBox(height: 5.0),
                       TextFormField(

@@ -2,7 +2,6 @@ import 'package:first_bloc/blocs/blocs.dart';
 import 'package:first_bloc/models/todo_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rive/rive.dart';
 
 class ShowTodos extends StatelessWidget {
   const ShowTodos({Key? key}) : super(key: key);
