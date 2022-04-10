@@ -2,11 +2,43 @@ import 'package:first_bloc/blocs/blocs.dart';
 import 'package:first_bloc/pages/user/home_page.dart';
 import 'package:first_bloc/pages/authentication/signin_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SplashPage extends StatelessWidget {
+class SplashPage extends StatefulWidget {
   static const String routeName = '/';
   const SplashPage({Key? key}) : super(key: key);
+
+  @override
+  State<SplashPage> createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    WidgetsBinding.instance!.addObserver(this);
+    super.initState();
+  }
+
+  @override
+  void didChangePlatformBrightness() {
+    var brightness = SchedulerBinding.instance!.window.platformBrightness;
+    bool isLightMode = brightness == Brightness.light;
+    _getMode(isLightMode);
+    super.didChangePlatformBrightness();
+  }
+
+  void _getMode(bool isLightMode) {
+    context
+        .read<ThemeBloc>()
+        .add(ChangeThemeEvent(isThemeLightSwitch: isLightMode));
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance!.removeObserver(this);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

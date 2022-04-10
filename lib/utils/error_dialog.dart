@@ -8,6 +8,23 @@ import '../models/custom_error.dart';
 void errorDialog(BuildContext context, CustomError e) {
   print('code: ${e.code}\nmessage: ${e.message}\nplugin: ${e.plugin}\n');
 
+  String errorMessage = '';
+
+  switch (e.code) {
+    case 'user-not-found':
+      errorMessage = 'The user is not found';
+      break;
+    case 'network-request-failed':
+      errorMessage = 'Network issue';
+      break;
+    case 'email-already-in-use':
+      errorMessage = 'Email already in use';
+      break;
+    default:
+      errorMessage = 'Unknown error';
+      break;
+  }
+
   if (Platform.isIOS) {
     showCupertinoDialog(
       context: context,
@@ -30,12 +47,15 @@ void errorDialog(BuildContext context, CustomError e) {
       builder: (context) {
         return AlertDialog(
           title: Text(
-            e.code,
+            //e.code,
+            errorMessage,
             style: Theme.of(context).textTheme.headline5,
+            textAlign: TextAlign.center,
           ),
           content: Text(
-            e.plugin + '\n' + e.message,
+            e.message,
             style: Theme.of(context).textTheme.bodyText1,
+            textAlign: TextAlign.center,
           ),
           actions: [
             TextButton(

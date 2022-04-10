@@ -105,6 +105,14 @@ class MyApp extends StatelessWidget {
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, state) {
+            Color getThemeColor(bool isThemeLight) {
+              if (isThemeLight) {
+                return themeLightColor;
+              } else {
+                return themeDarkColor;
+              }
+            }
+
             return MaterialApp(
               title: 'Flutter Demo',
               debugShowCheckedModeBanner: false,
@@ -120,19 +128,13 @@ class MyApp extends StatelessWidget {
                   .copyWith(
                 //scaffoldBackgroundColor: Colors.red,
                 appBarTheme: AppBarTheme(
-                  color: state.isThemeLightSwitch == true
-                      ? themeLightColor
-                      : themeDarkColor,
+                  color: getThemeColor(state.isThemeLightSwitch),
                   iconTheme: IconThemeData(
-                    color: !state.isThemeLightSwitch == true
-                        ? themeLightColor
-                        : themeDarkColor,
+                    color: getThemeColor(!state.isThemeLightSwitch),
                   ),
                 ),
                 cardTheme: CardTheme(
-                  color: state.isThemeLightSwitch == true
-                      ? themeLightColor
-                      : themeDarkColor,
+                  color: getThemeColor(state.isThemeLightSwitch),
                 ),
                 elevatedButtonTheme: ElevatedButtonThemeData(
                   style: ButtonStyle(
@@ -146,23 +148,17 @@ class MyApp extends StatelessWidget {
                     ),
                     elevation: MaterialStateProperty.all(10),
                     backgroundColor: MaterialStateProperty.all(
-                      !state.isThemeLightSwitch == true
-                          ? themeLightColor
-                          : themeDarkColor,
+                      getThemeColor(!state.isThemeLightSwitch),
                     ),
                     foregroundColor: MaterialStateProperty.all(
-                      state.isThemeLightSwitch == true
-                          ? themeLightColor
-                          : themeDarkColor,
+                      getThemeColor(state.isThemeLightSwitch),
                     ),
                   ),
                 ),
                 textButtonTheme: TextButtonThemeData(
                   style: ButtonStyle(
                     foregroundColor: MaterialStateProperty.all(
-                      !state.isThemeLightSwitch == true
-                          ? themeLightColor
-                          : themeDarkColor,
+                      getThemeColor(!state.isThemeLightSwitch),
                     ),
                   ),
                 ),
@@ -173,20 +169,14 @@ class MyApp extends StatelessWidget {
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                     borderSide: BorderSide(
-                      color: !state.isThemeLightSwitch == true
-                          ? themeLightColor
-                          : themeDarkColor,
+                      color: getThemeColor(!state.isThemeLightSwitch),
                     ),
                   ),
                   filled: true,
                   floatingLabelStyle: TextStyle(
-                    color: !state.isThemeLightSwitch == true
-                        ? themeLightColor
-                        : themeDarkColor,
+                    color: getThemeColor(!state.isThemeLightSwitch),
                   ),
-                  iconColor: !state.isThemeLightSwitch == true
-                      ? themeLightColor
-                      : themeDarkColor,
+                  iconColor: getThemeColor(!state.isThemeLightSwitch),
                 ),
                 textTheme: const TextTheme(
                   button: TextStyle(
@@ -208,9 +198,7 @@ class MyApp extends StatelessWidget {
                   ),
                 ).apply(
                   fontFamily: 'Righteous',
-                  bodyColor: !state.isThemeLightSwitch == true
-                      ? themeLightColor
-                      : themeDarkColor,
+                  bodyColor: getThemeColor(!state.isThemeLightSwitch),
                 ),
               ),
             );

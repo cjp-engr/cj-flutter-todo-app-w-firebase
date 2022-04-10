@@ -1,5 +1,4 @@
 import 'package:first_bloc/blocs/blocs.dart';
-import 'package:first_bloc/constants/db_constants.dart';
 import 'package:first_bloc/models/todo_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,7 +39,6 @@ class ShowTodos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final todos = context.watch<FilteredTodosBloc>().state.filteredTodos;
-    final fontSize = context.watch<FontSizeBloc>().state.fontSize;
 
     return MultiBlocListener(
       listeners: [

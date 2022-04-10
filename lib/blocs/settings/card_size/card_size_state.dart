@@ -24,6 +24,8 @@ extension CardSizeExtension on CardSizeStatus {
         return 110;
       case CardSizeStatus.height6:
         return 120;
+      default:
+        return 80;
     }
   }
 }
@@ -52,6 +54,8 @@ extension FontSizeExtension on FontSizeStatus {
         return 32;
       case FontSizeStatus.size6:
         return 35;
+      default:
+        return 20;
     }
   }
 }

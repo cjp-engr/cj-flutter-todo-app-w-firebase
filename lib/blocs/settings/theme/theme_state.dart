@@ -1,6 +1,6 @@
 part of 'theme_bloc.dart';
 
-enum AppTheme {
+enum AppThemeStatus {
   dark,
   light,
 }
