@@ -16,5 +16,5 @@ This application can be used to increase productivity, remember important things
   validators: ^3.0.0 <br />
   rive: ^0.8.4 <br />
     
-**Resources:** <br />
+**Animation used:** <br />
 https://rive.app/community/2244-4463-animated-login-screen/ <br />
