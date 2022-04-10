@@ -133,6 +133,23 @@ class MyApp extends StatelessWidget {
                     color: getThemeColor(!state.isThemeLightSwitch),
                   ),
                 ),
+                sliderTheme: SliderThemeData(
+                  activeTrackColor: getThemeColor(!state.isThemeLightSwitch),
+                  thumbColor: getThemeColor(!state.isThemeLightSwitch),
+                ),
+                switchTheme: SwitchThemeData(
+                  thumbColor: MaterialStateProperty.all(
+                    getThemeColor(!state.isThemeLightSwitch),
+                  ),
+                ),
+                checkboxTheme: CheckboxThemeData(
+                  fillColor: MaterialStateProperty.all(
+                    getThemeColor(!state.isThemeLightSwitch),
+                  ),
+                  checkColor: MaterialStateProperty.all(
+                    getThemeColor(state.isThemeLightSwitch),
+                  ),
+                ),
                 cardTheme: CardTheme(
                   color: getThemeColor(state.isThemeLightSwitch),
                 ),
